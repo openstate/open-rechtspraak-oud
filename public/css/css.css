@@ -1,0 +1,72 @@
+/*.votebox {
+    border: 1px solid black;
+    padding: 10px;
+}*/
+.votes {
+    
+
+}
+
+.vote-img{
+    padding: 3px;
+}
+.header{
+    padding-bottom: 4px;
+
+}
+.header .vote-img{
+    float:left;
+    padding:0px;
+}
+
+.header h3 {
+    display: inline;
+    left: 217px;
+    position: absolute;
+    top: -2px;
+}
+
+div.member {
+    min-height: 40px;
+    overflow: hidden;
+    position: relative;
+}
+
+div.member .vote-img { 
+    left: 3px;
+    position: absolute;
+    top: 3px;
+}
+
+.vote-img img{
+    height: 36px;
+}
+
+.member .canditext {
+    left: 50px;
+    position: absolute;
+    top: 0px;
+
+}
+.member .naam{
+    display: block;
+    left: 55px;;
+    position: absolute;
+    top: 18px;
+}
+
+.member .number {
+    float:right;
+}
+
+.gravatar img {
+    height:50px;
+    padding:3px;
+}
+
+.party {
+
+}
+
+
+
