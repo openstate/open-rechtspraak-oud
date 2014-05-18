@@ -66,7 +66,7 @@ class Rechtspraak extends CI_Controller {
         error_log("Finished Fetching $set\n");
     }
 
-    public function run() {
+    public function extract() {
         if (!$this->input->is_cli_request()) {
             error_log("(Illegal) Web Access Attempt on Rechstpraak Crawler");
             die();
@@ -120,17 +120,32 @@ class Rechtspraak extends CI_Controller {
         $this->get_set($set, array('ctl00$ContentPlaceHolder1$chklInstances$0' => $set));
 
         $json = json_encode($this->results);
-        file_put_contents("rechtspraak.json", $json);// where does this go to?
+        file_put_contents("rechtspraak.json", $json); // where does this go to?
 
         $filename = 'rechtspraak-' . date('Y-m-d') . '.json.gz';
         if (!file_exists($filename)) {
             $zh = gzopen($filename, 'w') or error_log("can't open: $php_errormsg");
-            if (-1 == gzwrite($zh, $s)) {
+            if (-1 == gzwrite($zh, $json)) {
                 error_log("can't write: $php_errormsg");
             }
-            gzclose($zh) or  error_log("can't close: $php_errormsg");
-        } 
+            gzclose($zh) or error_log("can't close: $php_errormsg");
+        }
         return;
+    }
+
+    public function transform() {
+        $file = file_get_contents("rechtspraak.json");
+        $data['json'] = json_decode($file, true);
+
+        foreach ($data['json'] as $record) {
+            $filename = 'rechtspraak' . DS . urlencode($record['name']) . '.txt';
+            echo 'SET:' . $record['set'] . ' NAME:' . $record['name'] . ' FILE:' . $filename . "\n";
+            $result[] = array('set'=>$record['set'],  'name'=>$record['name'],  'file'=>$filename);
+
+            file_put_contents($filename, $record['html']);
+        }
+        $json = json_encode($result);
+        file_put_contents("rechtspraak-index.json", $json); // where does this go to?
     }
 
 }
