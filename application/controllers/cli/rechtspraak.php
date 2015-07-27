@@ -51,7 +51,7 @@ class Rechtspraak extends CI_Controller {
                 $item = array('set' => $set, 'name' => $el->getAttribute('value'),
                     'html' => $detailspage->html);
                 $this->results[] = $item;
-                sleep(2);
+                //sleep(2);
             }
 
             $next = $page->xpath->query("//div[@class='mimicpager']/input[@class='next']");
