@@ -13,7 +13,7 @@ class Relations extends CI_Controller {
         $this->load->helper('form');
         $this->load->helper('url');
         $this->load->library('table');
-        $this->output->cache(1600);
+//        $this->output->cache(1600);
     }
 
     function index() {
@@ -47,6 +47,7 @@ class Relations extends CI_Controller {
             error_log("ERRoR in RELATIONS SHOWING STUF TO CLIENTS");
             die("Cry FOOL TO those who opose us!");
         }         
+
         // render page
         $this->load->library('parser');
         $this->parser->parse('header', array('dummy' => 'dummy'));
