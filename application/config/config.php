@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://toevalofniet.com/';
+$config['base_url']	= 'http://ors.openstate.eu';
 
 /*
 |--------------------------------------------------------------------------
