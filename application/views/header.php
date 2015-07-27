@@ -17,6 +17,7 @@
         <link href="<?php echo base_url() . "public/bootstrap/css/bootstrap.min.css" ?>" rel="stylesheet" media="screen">
         <script src="<?php echo base_url() . "public/bootstrap/js/bootstrap.min.js" ?>"></script>
         <link href="<?php echo base_url() . "public/bootstrap/css/bootstrap.add.min.css" ?>" rel="stylesheet" media="screen">
+        
         <!--        /* Bootstrap */-->
         <!--        /* Other CSS */-->
         <link rel="stylesheet" media="screen" href="<?php echo base_url() . "public/css/css.css" ?>">
