@@ -1,7 +1,7 @@
 <!-- Breadcrumbs -->
 <ul class="breadcrumb">
     <li><a href="<?= base_url(); ?>index.php">Home</a> <span class="divider">/</span></li>
-    <li ><a href="<?= site_url('relations'); ?>">Relaties</a><span class="divider">/</span></li>
+    <li ><a href="<?= site_url('relations'); ?>">Nevenfunctie</a><span class="divider">/</span></li>
     <li class="active"><?= $json['name']; ?></li>
 </ul>
 <h3><?= $json['name']; ?></h3>

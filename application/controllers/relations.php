@@ -13,24 +13,15 @@ class Relations extends CI_Controller {
         $this->load->helper('form');
         $this->load->helper('url');
         $this->load->library('table');
-      //  $this->output->cache(60);
+        //  $this->output->cache(60);
     }
 
     function index() {
+
         // get the index
         $file = file_get_contents("rechtspraak-index.json");
         $data['json'] = json_decode($file, true);
 
-//print_r($data['json']);
-// because of person who wants to be anonomous
-
-//        foreach($item in $data['json']){
-  //          print_r($item);
-    //         break;
-      //  }
-
-
-        //die();
 
         // render page
         $this->load->library('parser');
@@ -39,14 +30,25 @@ class Relations extends CI_Controller {
         $this->load->view('footer');
     }
 
+    function json() {
+
+        // get the index
+        $file = file_get_contents("rechtspraak-index.json");
+        $data['json'] = json_decode($file, true);
+
+        $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode($data['json']));
+    }
+
     public function instantie($enc_set, $enc_name) {
         // get ALL the fucking data
-      //  die("$enc_name");
-        if ($enc_name == "mw.+mr.+D.M.+Staal+"){
+        //  die("$enc_name");
+        if ($enc_name == "mw.+mr.+D.M.+Staal+") {
             die("404");
         }
-        
-        
+
+
         $set = urldecode($enc_set);
         $name = urldecode($enc_name);
 
@@ -55,16 +57,16 @@ class Relations extends CI_Controller {
         $json = json_decode($file, true);
 
         foreach ($json as $element) {
-            if ($element['set'] == $set && $element['name'] == $name) {                
+            if ($element['set'] == $set && $element['name'] == $name) {
                 $html = file_get_contents($element['file']);
-                $data['json'] = array( 'set'=>$element['set'], 'name'=>$element['name'], 'html'=>$html );
+                $data['json'] = array('set' => $element['set'], 'name' => $element['name'], 'html' => $html);
             }
         }
-        
-        if (!isset($data['json'])){
+
+        if (!isset($data['json'])) {
             error_log("ERRoR in RELATIONS SHOWING STUF TO CLIENTS");
             die("error in relations controller!");
-        }         
+        }
 
         // render page
         $this->load->library('parser');
@@ -72,7 +74,7 @@ class Relations extends CI_Controller {
         $this->parser->parse('relation_view', $data); //, $json); //default view
         $this->load->view('footer');
     }
-   
+
 }
 
 /* End of file relations.php */

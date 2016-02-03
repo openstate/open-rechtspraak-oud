@@ -1,7 +1,7 @@
 <!-- Breadcrumbs -->
 <ul class="breadcrumb">
     <li><a href="<?= base_url(); ?>index.php">Home</a> <span class="divider">/</span></li>
-    <li class="active"><a href="<?= site_url('relations'); ?>">Relaties</a></li>
+    <li class="active"><a href="<?= site_url('relations'); ?>">Nevenfuncties</a></li>
 </ul>
 <?php
 
