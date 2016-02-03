@@ -15,7 +15,7 @@
 |
 */
 $config['base_url']	= 'http://ors.openstate.eu';
-
+$config['base_url']	= 'http://localhost';
 /*
 |--------------------------------------------------------------------------
 | Index File

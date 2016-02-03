@@ -36,6 +36,7 @@
                             <ul class="nav">
                                 <li><a href="<?php echo base_url() ?>index.php">Home</a></li>
                                 <li><a href="<?php echo base_url() ?>index.php/relations">Relaties</a></li>
+                                <li><a href="<?php echo base_url() ?>index.php/content/page/opendata">Open Data</a></li>
                                 <li><a href="<?php echo base_url() ?>index.php/content/page/contact">Contact</a></li>
                             <!--<li><a href="<?php echo base_url() ?>index.php/test">Test</a></li>-->
                             </ul>
