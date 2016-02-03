@@ -15,3 +15,8 @@
     <li><a href="<?php echo base_url() . $dir . '/' . $fd ?>"><?php echo $fd ?></a></li><?php
 }
 ?></ul>
+<p/>
+<h3>API voor nevenfuncties</h3>
+<p>Open Rechtspraak bevat nu tevens ook een heuse API (application programming interface) voor nevenfuncties. Dit is een RESTFULL api welke twee apicalls ondersteunt:</p>
+<p>1. http://ors.openstate.eu/index.php/relations/json geeft een overzicht van alle nevenfuncties met URL's naar de JSON pagina</p>
+<p>2. http://ors.openstate.eu/relations/instantie/RECHTBANK/NAAM/json Naam en Rechtbank dienen in URL ENCODE gecodeerd te zijn, cf. de lijst van punt 1.</p>
