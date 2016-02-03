@@ -13,13 +13,24 @@ class Relations extends CI_Controller {
         $this->load->helper('form');
         $this->load->helper('url');
         $this->load->library('table');
-        $this->output->cache(1600);
+      //  $this->output->cache(60);
     }
 
     function index() {
         // get the index
         $file = file_get_contents("rechtspraak-index.json");
         $data['json'] = json_decode($file, true);
+
+//print_r($data['json']);
+// because of person who wants to be anonomous
+
+//        foreach($item in $data['json']){
+  //          print_r($item);
+    //         break;
+      //  }
+
+
+        //die();
 
         // render page
         $this->load->library('parser');
@@ -30,8 +41,15 @@ class Relations extends CI_Controller {
 
     public function instantie($enc_set, $enc_name) {
         // get ALL the fucking data
+      //  die("$enc_name");
+        if ($enc_name == "mw.+mr.+D.M.+Staal+"){
+            die("404");
+        }
+        
+        
         $set = urldecode($enc_set);
         $name = urldecode($enc_name);
+
 
         $file = file_get_contents("rechtspraak-index.json");
         $json = json_decode($file, true);
@@ -45,7 +63,7 @@ class Relations extends CI_Controller {
         
         if (!isset($data['json'])){
             error_log("ERRoR in RELATIONS SHOWING STUF TO CLIENTS");
-            die("Cry FOOL TO those who opose us!");
+            die("error in relations controller!");
         }         
 
         // render page

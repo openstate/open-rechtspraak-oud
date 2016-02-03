@@ -18,4 +18,4 @@
  #rewrites index and files in sub directory rechtspraak/*
  sudo php index.php cli rechtspraak transform
  
- #https://registernotariaat.nl/registernotariaat/find/Benayad-el+Molaka
+ 
