@@ -3,3 +3,5 @@
 /nbproject/
 /rechtspraak/
 /rechtspraak-index.json
+*~
+*.json
