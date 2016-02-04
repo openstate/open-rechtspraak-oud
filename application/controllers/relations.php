@@ -31,7 +31,7 @@ class Relations extends CI_Controller {
     }
 
     function json() {
-// get the index
+// get the index with json parameter
         $file = file_get_contents("rechtspraak-index.json");
         $json = json_decode($file, true);
 
@@ -59,9 +59,10 @@ class Relations extends CI_Controller {
         foreach ($divs as $child) {
 
             if (isset($data['fulltext'])) {
-                if (strlen($child->nodeValue) > strlen($data['fulltext']) ) 
-                             $data['fulltext'] = $child->nodeValue;    
-            } else $data['fulltext'] = $child->nodeValue;
+                if (strlen($child->nodeValue) > strlen($data['fulltext']))
+                    $data['fulltext'] = $child->nodeValue;
+            } else
+                $data['fulltext'] = $child->nodeValue;
             foreach ($child->childNodes as $gchild) {
                 if (!isset($gchild->tagName))
                     continue; //drop non marked shit
@@ -75,7 +76,7 @@ class Relations extends CI_Controller {
                     //  echo "Context HEADER set $contextheader\n<br/>";
                     continue;
                 }
-                if ($gchild->tagName == "dl" || $gchild->nodeName == "dl") {
+                if ($gchild->tagName == "dl" || $gchild->nodeName == "dl") {// parse dl counter for multiple values
                     // subloop for values dt and dd
                     foreach ($gchild->childNodes as $sgchild) {
                         if (!isset($sgchild->tagName)) {
