@@ -77,6 +77,7 @@ class Relations extends CI_Controller {
                     continue;
                 }
                 if ($gchild->tagName == "dl" || $gchild->nodeName == "dl") {// parse dl counter for multiple values
+                    $hash = array();
                     // subloop for values dt and dd
                     foreach ($gchild->childNodes as $sgchild) {
                         if (!isset($sgchild->tagName)) {
@@ -96,14 +97,17 @@ class Relations extends CI_Controller {
                             if ($contextdt == null)
                                 die("contextdd for data missing");
 
-                            $index = $contextheader . $contextdt;
+                           
                             $value = trim($sgchild->nodeValue);
-                            $data[$index] = $value;
+                        //    $data[$index] = $value;
+                            $hash[$contextdt]=$value;
                             //   print("<b>$index </b> $value \n<br/>");
                             $contextdt = null;
                         }
 //                        $contextdt = null;
                     }
+                    //store data hash in object
+                    $data[$contextheader][] = $hash;
 //                 $contextdt = null;
                 }
                 // $contextheader = NULL;
