@@ -1,0 +1,322 @@
+HTTP/1.1 200 OK
+Cache-Control: private,public, max-age=3600
+Content-Length: 18348
+Content-Type: text/html; charset=utf-8
+Server: Microsoft-IIS
+Strict-Transport-Security: max-age=31536000
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1
+X-Powered-By: ASP.NET
+Date: Mon, 27 Jul 2015 14:30:43 GMT
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="nl" lang="nl">
+<head id="ctl00_Head1" profile="http://www.w3.org/2005/10/profile">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link href="/SharedWebResources.axd?css/Default.css" rel="Stylesheet" type="text/css" />
+    <!--[if IE 7]>
+    <link href="/SharedWebResources.axd?css/IE7.css" rel="Stylesheet" type="text/css" />
+    <![endif]-->
+    <link rel="SHORTCUT ICON" type="image/ico" href="/SharedWebResources.axd?images/favicon.ico" />
+    <link rel="icon" type="image/ico" href="/SharedWebResources.axd?images/favicon.ico" />
+    <meta name="robots" content="index, follow" /><script type="text/javascript" src="/SharedWebResources.axd?js/jquery-1.3.2.min.js"></script><link type="text/css" rel="Stylesheet" href="/SharedWebResources.axd?css/LayoutRechtspraak.css" /><link type="text/css" rel="Stylesheet" href="/SharedWebResources.axd?css/SiteNavigation.css" /><link type="text/css" rel="Stylesheet" href="/SharedWebResources.axd?css/TabNavigation.css" /><link href="Css/namenlijst.css" type="text/css" rel="stylesheet" /><link media="print" href="Css/namenlijst_print.css" type="text/css" rel="stylesheet" /><title>
+	Nevenfuncties
+</title></head>
+<body>
+    <form name="aspnetForm" method="post" action="DetailPage.aspx" id="aspnetForm">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMTAyMTMzODg1Ng8WAh4KdGhpc1NlYXJjaDLxBAABAAAA/////wEAAAAAAAAADAIAAABPQmlzdHJvLk5hbWVubGlqc3QsIFZlcnNpb249MS4wLjU0MTAuMjEzMDIsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49bnVsbAUBAAAANEJpc3Ryby5SZWNodHNwcmFhay5OYW1lbmxpanN0LkNvbXBvbmVudHMuU2VhcmNoUXVlcnkIAAAAEXNlbGVjdGVkSW5zdGFuY2VzDnNlbGVjdGVkQ291cnRzFHNlbGVjdGVkQXBwZWFsQ291cnRzEHNlbGVjdGVkRnVuY3Rpb24Kc2VhcmNoVGV4dApyZXN1bHRQYWdlIjxBbGxDb3VydHNTZWxlY3RlZD5rX19CYWNraW5nRmllbGQoPEFsbEFwcGVhbENvdXJ0c1NlbGVjdGVkPmtfX0JhY2tpbmdGaWVsZAMDAwEBAAAAHFN5c3RlbS5Db2xsZWN0aW9ucy5BcnJheUxpc3QcU3lzdGVtLkNvbGxlY3Rpb25zLkFycmF5TGlzdBxTeXN0ZW0uQ29sbGVjdGlvbnMuQXJyYXlMaXN0CAEBAgAAAAkDAAAACQQAAAAJBQAAAAYGAAAAAAkGAAAAAQAAAAAABAMAAAAcU3lzdGVtLkNvbGxlY3Rpb25zLkFycmF5TGlzdAMAAAAGX2l0ZW1zBV9zaXplCF92ZXJzaW9uBQAACAgJBwAAAAEAAAABAAAAAQQAAAADAAAACQgAAAAAAAAAAAAAAAEFAAAAAwAAAAkIAAAAAAAAAAAAAAAQBwAAAAQAAAAGCQAAAAlIb2dlIFJhYWQNAxAIAAAAAAAAAAsWAmYPZBYCAgEPZBYCAgEPZBYCAgEPFgIeBFRleHQF5xDvu788aDE+DQogICAgICAgIEJlcm9lcHNnZWdldmVucyBlbiBuZXZlbmJldHJla2tpbmdlbiBSZWNodGVybGlqa2UgTWFjaHQgPGJyPiJtdy4gbXIuIEkuQS4gVGFuICINCiAgICAgIDwvaDE+PGgyPkJlcm9lcHNnZWdldmVuczwvaDI+PGRsPjxkdD4NCiAgICAgICAgICAgICAgICAgIEZ1bmN0aWUNCiAgICAgICAgICAgICAgICA8L2R0PjxkZD5HZXJlY2h0c2F1ZGl0ZXVyPC9kZD48ZHQ+SW5zdGFudGllPC9kdD48ZGQ+SG9nZSBSYWFkPC9kZD48ZHQ+RGF0dW0gaW5nYW5nPC9kdD48ZGQ+MTgtMDktMjAwNzwvZGQ+PC9kbD48ZGl2IGNsYXNzPSJjbGVhciI+PC9kaXY+PGgyPk5ldmVuYmV0cmVra2luZ2VuPC9oMj48cD5CZXRyb2trZW5lIHZlcnZ1bHQgZ2VlbiBuZXZlbmJldHJla2tpbmdlbi48L3A+PGRpdiBjbGFzcz0iY2xlYXIiPjwvZGl2PjxkaXYgY2xhc3M9ImNsZWFyIj48L2Rpdj48aDI+Vm9vcmdhYW5kZSBuZXZlbmJldHJla2tpbmdlbjwvaDI+PGRsPjxkdD5GdW5jdGllPC9kdD48ZGQ+TWVkZXdlcmtlciByZWRhY3RpZSBOSjwvZGQ+PGR0Pkluc3RhbnRpZTwvZHQ+PGRkPktsdXdlcjwvZGQ+PGR0PkRhdHVtIGluZ2FuZzwvZHQ+PGRkPjAxLTA5LTIwMDk8L2RkPjxkdD5EYXR1bSBlaW5kPC9kdD48ZGQ+MzEtMTItMjAxMjwvZGQ+PGR0PlNvb3J0IGJlZHJpamYvaW5zdGFudGllPC9kdD48ZGQ+T25iZWtlbmQ8L2RkPjxkdD5CZXpvbGRpZ2Q8L2R0PjxkZD5KYTwvZGQ+PC9kbD48ZGl2IGNsYXNzPSJjbGVhciI+PC9kaXY+PGRsPjxkdD5GdW5jdGllPC9kdD48ZGQ+TWVkZXdlcmtlciByZWRhY3RpZSBSdmRXPC9kZD48ZHQ+SW5zdGFudGllPC9kdD48ZGQ+S2x1d2VyPC9kZD48ZHQ+RGF0dW0gaW5nYW5nPC9kdD48ZGQ+MDEtMDktMjAwOTwvZGQ+PGR0PkRhdHVtIGVpbmQ8L2R0PjxkZD4zMS0xMi0yMDEyPC9kZD48ZHQ+U29vcnQgYmVkcmlqZi9pbnN0YW50aWU8L2R0PjxkZD5PbmJla2VuZDwvZGQ+PGR0PkJlem9sZGlnZDwvZHQ+PGRkPkphPC9kZD48L2RsPjxkaXYgY2xhc3M9ImNsZWFyIj48L2Rpdj48aDI+Vm9vcmdhYW5kZSBiZXRyZWtraW5nZW48L2gyPjxwIGNsYXNzPSJ0ZXh0b3B0aW1hbHdpZHRoIj4NCiAgICAgICAgICAgIFJlY2h0ZXJzIG1ha2VuIG9vayBodW4gPHN0cm9uZz5ob29mZDwvc3Ryb25nPmJldHJla2tpbmcoZW4pIHZvb3JhZmdhYW5kZSBhYW4gaHVuIGJlbm9lbWluZyB0b3QgcmVjaHRlciBiZWtlbmQuIERpdCBnZWxkdCB2b29yIGhvb2ZkYmV0cmVra2luZ2VuIHRvdCBlZW4gcGVyaW9kZSB2YW4gemVzIGphYXIgdm9vcmFmZ2FhbmRlIGFhbiBodW4gZWVyc3RlIGJlbm9lbWluZyBhbHMgcmVjaHRlciwgdGVuemlqIGRlemUgbGFuZ2VyIGRhbiB6ZXMgamFhciBnZWxlZGVuIHppam4gdWl0Z2VvZWZlbmQuIEluZGllbiBkaXQgdm9vciBiZXRyb2trZW5lIGdlbGR0IHphbCBkZXplIGJldHJla2tpbmcgaGllcm92ZXIgdmVybWVsZCBzdGFhbi4gSXMgaWVtYW5kIGxhbmdlciBkYW4gemVzIGphYXIgcmVjaHRlciwgZGFuIGlzIGdlZW4gYXJiZWlkc3ZlcmxlZGVuIG1lZXIgb3BnZW5vbWVuLg0KICAgICAgICAgIDwvcD48aDI+SGlzdG9yaWUgYmVyb2Vwc2dlZ2V2ZW5zPC9oMj48cD5HZWVuIGhpc3RvcmlzY2hlIGdlZ2V2ZW5zIGJla2VuZC48L3A+PHAgY2xhc3M9InRleHRvcHRpbWFsd2lkdGgiPg0KICAgICAgICAgICAgRGUgcmVjaHRlcmxpamtlIGFtYnRlbmFyZW4gbWV0IHJlY2h0c3ByYWFrIGJlbGFzdCBpbiBlZW4gcmVjaHRiYW5rIHppam4gdmFuIHJlY2h0c3dlZ2UgcmVjaHRlci1wbGFhdHN2ZXJ2YW5nZXIgaW4gZGUgb3ZlcmlnZSByZWNodGJhbmtlbi4NCiAgICAgICAgICA8L3A+PHAgY2xhc3M9InRleHRvcHRpbWFsd2lkdGgiPg0KICAgICAgICAgICAgRGUgcmVjaHRlcmxpamtlIGFtYnRlbmFyZW4gbWV0IHJlY2h0c3ByYWFrIGJlbGFzdCBpbiBlZW4gZ2VyZWNodHNob2YgemlqbiB2YW4gcmVjaHRzd2VnZSByYWFkc2hlZXItcGxhYXRzdmVydmFuZ2VyIGluIGRlIG92ZXJpZ2UgZ2VyZWNodHNob3Zlbi4NCiAgICAgICAgICA8L3A+PHAgY2xhc3M9InRleHRvcHRpbWFsd2lkdGgiPg0KICAgICAgICAgICAgKEFydGlrZWxlbiA0MCBsaWQgMiBlbiA1OCBsaWQgMiBXZXQgb3AgZGUgcmVjaHRlcmxpamtlIG9yZ2FuaXNhdGllKQ0KICAgICAgICAgIDwvcD5kZNDCTBABMyPPgRYWFYFbcgTmX3Ip" />
+
+<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="8F9770BC" />
+    <div id="liquidwrapper">
+            <div id="shadowleft">
+                <div id="liquidcontentwrapper">
+    <!-- START HEADER -->
+                <div id="header">  
+                        <div class="officieel">
+                            <ul>De offici&euml;le site van de 
+                    	    	<li><a href="http://www.rechtspraak.nl/Organisatie/Rechtbanken">rechtbanken</a>, </li>
+                    	    	<li><a href="http://www.rechtspraak.nl/Organisatie/Gerechtshoven">gerechtshoven</a>, </li>
+                    	    	<li><a href="http://www.rechtspraak.nl/Organisatie/CRvB">CRvB</a>, </li>
+                    	    	<li><a href="http://www.rechtspraak.nl/Organisatie/CBb">CBb</a>, </li>
+                    	    	<li><a href="http://www.rechtspraak.nl/Organisatie/Hoge-Raad">Hoge Raad</a> en </li>                   	    	                    	    	
+                    	    	<li><a href="http://www.rechtspraak.nl/Organisatie/Raad-Voor-De-Rechtspraak">Raad voor de rechtspraak</a></li>                    	    	                   	    	
+                    	    </ul>      
+                        </div>
+                        <a id="logo" href="http://www.rechtspraak.nl">
+                            <img src="/SharedWebResources.axd?images/Logo_rechtspraak.gif" alt="Logo van de rechtspraak"/>
+                        </a>
+    <div id="titlearea">
+
+					</div>
+    <a href="#liquidcontent" class="skiplink">direct naar inhoud</a>
+<div id="topnav">
+    <ul>
+		<li>
+<a href="http://www.rechtspraak.nl/Recht-In-Nederland/Pages/default.aspx" >Recht in Nederland</a>
+<ul>
+<li>
+<a href="http://www.rechtspraak.nl/Recht-In-Nederland/Hoe-werkt-het-recht/Pages/default.aspx" >Hoe werkt het recht</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Recht-In-Nederland/In-de-rechtszaal/Pages/default.aspx" >In de rechtszaal</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Recht-In-Nederland/ThemaDossiers/Pages/default.aspx" >Themadossiers</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Recht-In-Nederland/Lesmateriaal/Pages/rechtspraak-in-de-klas.aspx" >Rechtspraak in de klas</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Recht-In-Nederland/VeelgesteldeVragen/Pages/default.aspx" >Veelgestelde vragen</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Recht-In-Nederland/Rechterlijke-indeling-Nederland/Pages/default.aspx" >Rechterlijke indeling Nederland</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Recht-In-Nederland/Grondwet-200-jaar/Pages/default.aspx" >Grondwet 200 jaar</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Recht-In-Nederland/Modernisering-rechtspraak/Paginas/default.aspx" >Modernisering rechtspraak</a>
+</li>
+</ul>
+</li>
+	</ul>
+<ul>
+		<li>
+<a href="http://www.rechtspraak.nl/Naar-de-rechter/Pages/default.aspx" >Naar de rechter</a>
+<ul>
+<li>
+<a href="http://www.rechtspraak.nl/Naar-de-rechter/Uw-situatie/Pages/default.aspx" >Uw situatie</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Naar-de-rechter/Kantonrechter/Pages/default.aspx" >Kantonrechter</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Naar-de-rechter/Civiele-rechter/Pages/default.aspx" >Civiele rechter</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Naar-de-rechter/Bestuursrechter/Pages/default.aspx" >Bestuursrechter</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Naar-de-rechter/Strafrechter/Pages/default.aspx" >Strafrechter</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Naar-de-rechter/Hoger-beroep/Pages/default.aspx" >Hoger beroep</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Naar-de-rechter/Oplossen-zonder-rechter/Pages/default.aspx" >Oplossen zonder rechter</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Naar-de-rechter/Formulieren/Pages/default.aspx" >Formulieren</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Naar-de-rechter/Juridisch-advies/Pages/default.aspx" >Juridisch advies</a>
+</li>
+</ul>
+</li>
+	</ul>
+<ul>
+		<li>
+<a href="http://www.rechtspraak.nl/Organisatie/Pages/default.aspx" >Organisatie</a>
+<ul>
+<li>
+<a href="http://www.rechtspraak.nl/Organisatie/Rechtbanken/Pages/default.aspx" >Rechtbanken</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Organisatie/Gerechtshoven/Pages/default.aspx" >Gerechtshoven</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Organisatie/CRvB/Pages/default.aspx" >Centrale Raad van Beroep</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Organisatie/CBb/Pages/default.aspx" >College van Beroep voor het bedrijfsleven</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Organisatie/Raad-van-State/Pages/default.aspx" >Raad van State</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Organisatie/Hoge-Raad/Pages/default.aspx" >Hoge Raad der Nederlanden</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Organisatie/Raad-Voor-De-Rechtspraak/Pages/default.aspx" >Raad voor de rechtspraak</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Organisatie/LDCR/Pages/default.aspx" >Landelijk Dienstencentrum</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Organisatie/spir-it/Pages/default.aspx" >spir-it: Rechtspraak-ICT</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Organisatie/ssr/Pages/default.aspx" >SSR: Rechtspraak-opleidingen</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Organisatie/Publicaties-En-Brochures/Pages/default.aspx" >Publicaties en brochures</a>
+</li>
+</ul>
+</li>
+	</ul>
+<ul>
+		<li>
+<a href="http://www.rechtspraak.nl/Actualiteiten/Pages/default.aspx" >Actualiteiten</a>
+<ul>
+<li>
+<a href="http://www.rechtspraak.nl/Actualiteiten/Persinformatie/Pages/default.aspx" >Persinformatie</a>
+</li>
+<li>
+<a href="http://dossier.rechtspraak.nl" >Bekende rechtszaken</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Actualiteiten/Video-archief/Pages/default.aspx" >Video-archief</a>
+</li>
+</ul>
+</li>
+	</ul>
+<ul class="selected">
+		<li>
+<a href="http://www.rechtspraak.nl/Uitspraken-en-Registers/Pages/default.aspx" >Uitspraken en registers</a>
+<ul>
+<li>
+<a href="http://www.rechtspraak.nl/Uitspraken-en-Registers/Uitspraken/Pages/default.aspx" >Uitspraken</a>
+</li>
+<li>
+<a href="https://curateleenbewindregister.rechtspraak.nl" >Centraal Curatele- en bewindregister</a>
+</li>
+<li>
+<a href="http://insolventies.rechtspraak.nl" >Centraal Insolventieregister</a>
+</li>
+<li>
+<a href="http://namenlijst.rechtspraak.nl/" >Nevenfuncties van rechters</a>
+</li>
+<li>
+<a href="http://uitspraken.rechtspraak.nl/#weekoverzicht" >Weekoverzicht uitspraken</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Uitspraken-en-Registers/registratie-persoonsgegevens/Pages/default.aspx" >Registratie persoonsgegevens</a>
+</li>
+<li>
+<a href="http://hgr.rechtspraak.nl" >Huwelijksgoederenregister</a>
+</li>
+</ul>
+</li>
+	</ul>
+<ul>
+		<li>
+<a href="http://www.rechtspraak.nl/Procedures/Pages/default.aspx" >Procedures</a>
+<ul>
+<li>
+<a href="http://www.rechtspraak.nl/Naar-de-rechter/Formulieren/Pages/default.aspx" >Formulieren</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Procedures/Landelijke-regelingen/Pages/default.aspx" >Landelijke regelingen</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Procedures/Mediation/Pages/default.aspx" >Mediation</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Procedures/Tarieven-griffierecht/Pages/default.aspx" >Tarieven griffierecht</a>
+</li>
+</ul>
+</li>
+	</ul>
+<ul>
+		<li>
+<a href="http://www.rechtspraak.nl/Werken-bij/Pages/default.aspx" >Werken bij</a>
+<ul>
+<li>
+<a href="http://www.rechtspraak.nl/Werken-bij/De-Rechtspraak-als-werkgever/Pages/default.aspx" >De Rechtspraak als werkgever</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Werken-bij/gerechtsambtenaar-worden/Pages/default.aspx" >Gerechtsambtenaar worden</a>
+</li>
+<li>
+<a href="http://www.rechtspraak.nl/Werken-bij/rechter-worden/Pages/default.aspx" >Rechter/raadsheer worden</a>
+</li>
+</ul>
+</li>
+	</ul>
+
+    </div>
+    <div class="toolbar">
+    <!--begin toolbar links-->
+    <!--end toolbar links-->
+    </div>
+    <div id="navigatiewrapper">
+
+            <div class="metanav">
+
+                <ul>
+                    <li><a href="http://www.rechtspraak.nl/servicepaginas/Pages/Contact.aspx">Contact</a> | </li>
+                    <li><a href="http://www.rechtspraak.nl/sitemap/Pages/Sitemap.aspx">Sitemap</a> | </li>
+                    <li><a href="http://www.rechtspraak.nl/sitemap/Pages/azIndex.aspx">A-Z index</a> | </li>
+                    <li><a href="http://www.rechtspraak.nl/servicepaginas/Pages/rss.aspx">RSS</a> | </li>
+                    <li><a href="http://www.rechtspraak.nl/english/Pages/default.aspx">English</a></li>
+                </ul>
+                <div class="clear">
+                </div>
+            </div>
+        </div>
+                </div>
+                
+                <!-- END HEADER -->
+    <div id="liquidcontent">
+    <ul class="breadcrumb"><li><a href="http://www.rechtspraak.nl/Pages/default.aspx">Home</a></li><li><span class="separator">&gt;</span><a href="http://www.rechtspraak.nl/Uitspraken-en-Registers/Pages/default.aspx">Uitspraken en registers</a></li><li><span class="separator">&gt;</span><a href="http://namenlijst.rechtspraak.nl/">Nevenfuncties van rechters</a></li></ul>
+
+    <!--main content-->
+    <div id="liquid2columncontainer">
+        <div id="liquidcentercolumncontainer">
+            <div id="liquidcentercolumn">
+                <!-- div reset syle (add stylesheet met reset style) -->
+                
+<div class="tabnavigation">
+    <ul>
+        <li><input type="submit" name="ctl00$tabControl$tabZoeken" value="zoeken" id="ctl00_tabControl_tabZoeken" /></li>
+        <li><input type="submit" name="ctl00$tabControl$tabResultaat" value="resultaat" id="ctl00_tabControl_tabResultaat" /></li>
+        <li class="endselected"><input type="submit" name="ctl00$tabControl$tabDetails" value="details" id="ctl00_tabControl_tabDetails" /></li>
+    </ul>
+</div>
+
+               
+                <div class="tabcontent">
+                    
+    <div class="details">
+        ﻿<h1>
+        Beroepsgegevens en nevenbetrekkingen Rechterlijke Macht <br>"mw. mr. I.A. Tan "
+      </h1><h2>Beroepsgegevens</h2><dl><dt>
+                  Functie
+                </dt><dd>Gerechtsauditeur</dd><dt>Instantie</dt><dd>Hoge Raad</dd><dt>Datum ingang</dt><dd>18-09-2007</dd></dl><div class="clear"></div><h2>Nevenbetrekkingen</h2><p>Betrokkene vervult geen nevenbetrekkingen.</p><div class="clear"></div><div class="clear"></div><h2>Voorgaande nevenbetrekkingen</h2><dl><dt>Functie</dt><dd>Medewerker redactie NJ</dd><dt>Instantie</dt><dd>Kluwer</dd><dt>Datum ingang</dt><dd>01-09-2009</dd><dt>Datum eind</dt><dd>31-12-2012</dd><dt>Soort bedrijf/instantie</dt><dd>Onbekend</dd><dt>Bezoldigd</dt><dd>Ja</dd></dl><div class="clear"></div><dl><dt>Functie</dt><dd>Medewerker redactie RvdW</dd><dt>Instantie</dt><dd>Kluwer</dd><dt>Datum ingang</dt><dd>01-09-2009</dd><dt>Datum eind</dt><dd>31-12-2012</dd><dt>Soort bedrijf/instantie</dt><dd>Onbekend</dd><dt>Bezoldigd</dt><dd>Ja</dd></dl><div class="clear"></div><h2>Voorgaande betrekkingen</h2><p class="textoptimalwidth">
+            Rechters maken ook hun <strong>hoofd</strong>betrekking(en) voorafgaande aan hun benoeming tot rechter bekend. Dit geldt voor hoofdbetrekkingen tot een periode van zes jaar voorafgaande aan hun eerste benoeming als rechter, tenzij deze langer dan zes jaar geleden zijn uitgeoefend. Indien dit voor betrokkene geldt zal deze betrekking hierover vermeld staan. Is iemand langer dan zes jaar rechter, dan is geen arbeidsverleden meer opgenomen.
+          </p><h2>Historie beroepsgegevens</h2><p>Geen historische gegevens bekend.</p><p class="textoptimalwidth">
+            De rechterlijke ambtenaren met rechtspraak belast in een rechtbank zijn van rechtswege rechter-plaatsvervanger in de overige rechtbanken.
+          </p><p class="textoptimalwidth">
+            De rechterlijke ambtenaren met rechtspraak belast in een gerechtshof zijn van rechtswege raadsheer-plaatsvervanger in de overige gerechtshoven.
+          </p><p class="textoptimalwidth">
+            (Artikelen 40 lid 2 en 58 lid 2 Wet op de rechterlijke organisatie)
+          </p>
+    </div>
+
+                </div>
+            </div>
+            
+        </div>
+        <div id="leftcolumn">
+            <div class="sitenavigation">
+<div class="header">
+		<div>Nevenfuncties van rechters</div>
+	</div>
+<ul>
+<li class="expandable"><a href="http://www.rechtspraak.nl/Uitspraken-en-Registers/nevenfuncties/Pages/Leidraad-onpartijdigheid-en-nevenfuncties-van-de-rechter.aspx" title="">Leidraad onpartijdigheid en nevenfuncties van de rechter</a>
+</li>
+</ul>
+</div>
+
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+    </div>
+    </div>
+        </div>
+    </div>
+    </form>
+</body>
+</html>

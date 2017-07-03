@@ -1,0 +1,35 @@
+version: '3'
+services:
+  c-ors-nginx:
+    image: nginx:1.9.9
+    volumes:
+      - ../www:/usr/share/nginx/html
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx-site.conf:/etc/nginx/conf.d/default.conf
+      - ./restrictions.conf:/etc/nginx/global/restrictions.conf
+    restart: always
+    networks:
+      - nginx-load-balancer
+      - ors
+  # FOR DEVVING ONLY
+  #  ports:
+  #    - "80:80"
+  c-ors-app:
+    #image: php:5.6.16-fpm
+    build:
+      context: .
+      dockerfile: Dockerfile_php-fpm
+    # Make sure that this volume is the same as used by nginx
+    volumes:
+      - ../www:/usr/share/nginx/html
+      #- ./php-fpm.conf:/usr/local/etc/php-fpm.conf
+    # add php.ini
+    # smtp.conf
+    restart: always
+    networks:
+      - ors
+networks:
+  ors:
+  nginx-load-balancer:
+    external:
+      name: docker_nginx-load-balancer
