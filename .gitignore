@@ -1,3 +1,6 @@
 * Build Log *
 rechtspraak.json
 *.json.gz
+vendor
+*.swp
+*.log

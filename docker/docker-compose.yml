@@ -1,6 +1,6 @@
 version: '3'
 services:
-  c-ors-nginx:
+  nginx:
     image: nginx:1.9.9
     volumes:
       - ../www:/usr/share/nginx/html
@@ -9,15 +9,14 @@ services:
       - ./restrictions.conf:/etc/nginx/global/restrictions.conf
     restart: always
     networks:
-      - nginx-load-balancer
+      #- nginx-load-balancer
       - ors
   # FOR DEVVING ONLY
   #  ports:
   #    - "80:80"
-  c-ors-app:
-    #image: php:5.6.16-fpm
+  app:
     build:
-      context: .
+      context: ../www
       dockerfile: Dockerfile_php-fpm
     # Make sure that this volume is the same as used by nginx
     volumes:
@@ -28,8 +27,31 @@ services:
     restart: always
     networks:
       - ors
+  elasticsearch:
+    image: "docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION}"
+    environment:
+      - http.host=0.0.0.0
+      - transport.host=127.0.0.1
+      - cluster.name=docker-cluster
+      - xpack.security.enabled=false
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    cap_add:
+      - IPC_LOCK
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    restart: always
+    networks:
+      - ors
+volumes:
+  esdata:
+    driver: local
 networks:
   ors:
-  nginx-load-balancer:
-    external:
-      name: docker_nginx-load-balancer
+  #nginx-load-balancer:
+  #  external:
+  #    name: docker_nginx-load-balancer

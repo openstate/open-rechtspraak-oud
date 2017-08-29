@@ -2,9 +2,9 @@
 <html lang="nl">
     <head>
         <meta charset="utf-8">
-       
+
         <title><?php
-            echo 'Toeval of Niet Rechtspraak';
+            echo 'Open rechtspraak';
             ?></title>
         <!--        /* JQUERY */-->
         <script src="<?php echo base_url() . "public/js/jquery-1.9.0.min.js" ?>"></script>
@@ -25,13 +25,13 @@
                 <div class="header" >
                     <h3 class="muted" style="
                         display: inline;position: absolute;
-                        ">Toeval of Niet Rechtspraak</h3></div>
+                        ">Open Rechtspraak</h3></div>
                 <div class="navbar">
                     <div class="navbar-inner">
                         <div class="container">
                             <ul class="nav">
                                 <li><a href="<?php echo base_url() ?>index.php">Home</a></li>
-                                <li><a href="<?php echo base_url() ?>index.php/relations">Nevenfuncties</a></li>
+                                <li><a href="<?php echo base_url() ?>index.php/relations/persons">Personen</a></li>
                                 <li><a href="<?php echo base_url() ?>index.php/content/page/opendata">Open Data</a></li>
                                 <li><a href="<?php echo base_url() ?>index.php/content/page/contact">Contact</a></li>
                             </ul>

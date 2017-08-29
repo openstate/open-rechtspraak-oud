@@ -1,0 +1,31 @@
+FROM php:5.6.16-fpm
+MAINTAINER Sicco van Sas <sicco@openstate.eu>
+
+RUN echo 'Europe/Amsterdam' > /etc/timezone
+
+# Use the same folder as nginx for the website files
+WORKDIR /usr/share/nginx/html
+
+# Install sSMTP
+RUN apt-get update && \
+    apt-get install -y \
+        ssmtp \
+        git \
+        zip
+
+# Installation of php extensions
+RUN docker-php-ext-install mbstring > /dev/null
+
+RUN ls
+
+ADD ors-ci-app ors-ci-app
+
+RUN cd ors-ci-app && php composer.phar install
+
+RUN echo "0 0    * * *   root    ors-ci-app/daily.sh" >> /etc/crontab
+
+# Debug
+#RUN sed -i '/error_log = \/proc\/self\/fd\/2/a log_level = debug' /usr/local/etc/php-fpm.conf
+#RUN sed -i '/access.log = \/proc\/self\/fd\/2/a php_admin_value[error_log] = /proc/self/fd/2' /usr/local/etc/php-fpm.conf
+#RUN sed -i '/access.log = \/proc\/self\/fd\/2/a php_flag[display_errors] = on' /usr/local/etc/php-fpm.conf
+#RUN sed -i '/access.log = \/proc\/self\/fd\/2/a php_admin_flag[log_errors] = on' /usr/local/etc/php-fpm.conf

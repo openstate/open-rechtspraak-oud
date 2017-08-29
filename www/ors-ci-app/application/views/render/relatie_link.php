@@ -1,4 +1,4 @@
-<a href="<?= site_url(array('relations', 'instantie', urlencode($set),
+<a href="<?= site_url(array('relations', 'position', urlencode($type),
                         urlencode($name))) ?>"><?= $name ?></a>
 
 

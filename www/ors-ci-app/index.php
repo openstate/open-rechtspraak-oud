@@ -191,6 +191,10 @@ if (defined('ENVIRONMENT'))
 		define('APPPATH', BASEPATH.$application_folder.'/');
 	}
 
+// composer w. elastic
+include_once './vendor/autoload.php';
+//$client = Elasticsearch\ClientBuilder::create()->build();
+
 /*
  * --------------------------------------------------------------------
  * LOAD THE BOOTSTRAP FILE
