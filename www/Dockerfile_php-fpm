@@ -22,7 +22,7 @@ ADD ors-ci-app ors-ci-app
 
 RUN cd ors-ci-app && php composer.phar install
 
-RUN echo "0 0    * * *   root    ors-ci-app/daily.sh" >> /etc/crontab
+RUN echo "0 0    * * *   root    /usr/share/nginx/html/ors-ci-app/daily.sh" >> /etc/crontab
 
 # Debug
 #RUN sed -i '/error_log = \/proc\/self\/fd\/2/a log_level = debug' /usr/local/etc/php-fpm.conf
