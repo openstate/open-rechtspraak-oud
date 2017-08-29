@@ -192,7 +192,7 @@ if (defined('ENVIRONMENT'))
 	}
 
 // composer w. elastic
-include_once './vendor/autoload.php';
+include_once '/opt/vendor/autoload.php';
 //$client = Elasticsearch\ClientBuilder::create()->build();
 
 /*

@@ -16,11 +16,11 @@ RUN apt-get update && \
 # Installation of php extensions
 RUN docker-php-ext-install mbstring > /dev/null
 
-RUN ls
-
 ADD ors-ci-app ors-ci-app
 
-RUN cd ors-ci-app && php composer.phar install
+RUN cp ors-ci-app/composer* /opt
+
+RUN cd /opt && php composer.phar install
 
 RUN echo "0 0    * * *   root    /usr/share/nginx/html/daily.sh" >> /etc/crontab
 
