@@ -9,7 +9,7 @@ services:
       - ./restrictions.conf:/etc/nginx/global/restrictions.conf
     restart: always
     networks:
-      #- nginx-load-balancer
+      - nginx-load-balancer
       - ors
   # FOR DEVVING ONLY
   #  ports:
@@ -21,9 +21,6 @@ services:
     # Make sure that this volume is the same as used by nginx
     volumes:
       - ../www:/usr/share/nginx/html
-      #- ./php-fpm.conf:/usr/local/etc/php-fpm.conf
-    # add php.ini
-    # smtp.conf
     restart: always
     networks:
       - ors
@@ -52,6 +49,6 @@ volumes:
     driver: local
 networks:
   ors:
-  #nginx-load-balancer:
-  #  external:
-  #    name: docker_nginx-load-balancer
+  nginx-load-balancer:
+    external:
+      name: docker_nginx-load-balancer
