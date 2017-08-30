@@ -7,7 +7,7 @@ class Es_model extends CI_Model {
     public function __construct() {
         parent::__construct();
 
-        $hosts = ['docker_c-dev-es_1'];
+        $hosts = ['ors_elasticsearch_1'];
         $this->client = Elasticsearch\ClientBuilder::create()->setHosts($hosts)->build();
     }
 
