@@ -1,7 +1,5 @@
 <?php
 
-// all data operations for rechtstpraak used by CLI and VIEWER
-// calls sub models for sources, and possibly enrichers
 class Rechtspraak_model extends CI_Model {
 
     public function __construct() {
@@ -38,7 +36,7 @@ class Rechtspraak_model extends CI_Model {
 
     private function parse_pretitles($name, &$result) {
         $pretitles = [
-            'dr.', 'drs.', 'prof.', 'ing.', 'ir.', 'mr.', 'jonkheer ', 'baron ', 'barones ', 'Baron ', 'Barones ', 'Graaf ', 'graaf '
+            'dr.', 'drs.', 'prof.', 'ing.', 'ir.', 'mr.', 'jonkheer ', 'baron ', 'barones ', 'Baron ', 'Barones ', 'Graaf ', 'graaf ', 'Kol', 'kol', 'Ktza', 'ktza'
         ];
         foreach ($pretitles as $pretitle) {
             if ($this->startswith($name, $pretitle)) {
@@ -73,14 +71,13 @@ class Rechtspraak_model extends CI_Model {
 
     private function parse_lastname_and_post_titles($name, &$result) {
         $posttitles = [
-            'MPA', 'RA', 'LL.M.'
+            'MPA', 'RA', 'LL.M.', 'MSc.', "UM"
         ];
         $wrds = explode(" ", $name);
         foreach ($posttitles as $posttitle) {
             if (end($wrds) == $posttitle) {
                 $result['Titels'][] = $posttitle;
                 $name = substr($name, 0, strlen($name) - strlen($posttitle));
-
                 break;
             }
         }
@@ -99,37 +96,6 @@ class Rechtspraak_model extends CI_Model {
 
         $name = $this->parse_lastname_and_post_titles($name, $result);
         return $result;
-    }
-
-    /*
-     *  //http://www.cbgfamilienamen.nl/nfb/lijst_namen.php?operator=eq&naam=van+roomen
-     *  YIELDS country of origin at the very least! and tag other or typically dutch
-     */
-
-    private function enrich_lastname($lastname) {
-        $link = "http://www.cbgfamilienamen.nl/nfb/lijst_namen.php?operator=eq&naam="
-                . urlencode($lastname);
-        $response = file_get_contents($link);
-
-        var_dump($response);
-        // <li class="optie"><a href="detail_naam.php?gba_naam=van+Roomen&amp;nfd_naam=Roomen%2C+van&amp;info=analyse+en+verklaring&amp;operator=eq&amp;taal=">analyse en verklaring</a></li>
-        // yields 
-        // http://www.cbgfamilienamen.nl/nfb/detail_naam.php?gba_naam=van+Roomen&nfd_naam=Roomen%2C+van&info=analyse+en+verklaring&operator=eq&taal=
-        // yields 
-//        <div id="analyse_en_verklaring">	
-//			<p><strong>verklaring: </strong><br>De familienaam Yildirim is afkomstig uit Turkije.</p>
-//
-//		<br><strong>kenmerken:</strong>
-//			<table><tbody><tr>
-//					<td width="200"><a href="detail_naam.php?info=kenmerk&amp;kenmerk=andere+taal&amp;nfd_naam=Yildirim&amp;gba_lcnaam=&amp;operator=eq&amp;taal=">andere taal</a></td>
-//					</tr></tbody></table>	
-//		<p>	
-//	</p>	
-//</div>
-//        of Uw zoekactie naar van Boetzelaer-Gulyás heeft geen resultaat.
-
-
-        die();
     }
 
     /*
@@ -157,6 +123,7 @@ class Rechtspraak_model extends CI_Model {
                     }
                 }
                 $vol += count($data);
+                print(" Items processed $vol\n");
             }
         } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n";
@@ -164,36 +131,44 @@ class Rechtspraak_model extends CI_Model {
     }
 
     /*
-     * Enricher : family 
+     * Enricher : family (dev phase)
      */
 
     public function enrich_family() {
-        $index = 'rechtspraak_l';
-        $indextype = 'namenlijst';
+        $this->load->model('Familienamen_model');
+        $src_index = 'rechtspraak_l';
+        $src_indextype = 'namenlijst';
         $excludes = ["item", "previous"];
-        try {
-            $scroll_id = null;
-            $vol = 0;
-            while (true) {
-                $data = $this->Es_model->get_all_ti_exclude($index, $indextype, $scroll_id, $excludes);
-                if (count($data) == 0) {
-                    break;
-                }
-                foreach ($data as $element) {
-                    if (!isset($element["_source"]["enrichments_family_name"]) &&
-                            isset($element["_source"]["enrichments_basic_name"])
-                    ) {
-                        var_dump($element);
-                        $res = $this->enrich_lastname($element['_source']["enrichments_basic_name"]["Achternaam"]); // yields result that can be added or put in place                    
-                        $fields = [ 'enrichments_family_name' => $res];
+        $timestamp = $this->Rechtspraak_model->get_timestamp();
 
-                        //$this->Es_model->update($index, $indextype, $element["_id"], $fields);
-                    }
-                }
-                $vol += count($data);
+        $scroll_id = null;
+        $vol = 0;
+        while (true) {
+            $data = $this->Es_model->get_all_ti_exclude($src_index, $src_indextype, $scroll_id, $excludes);
+            if (count($data) == 0) {
+                break;
             }
-        } catch (Exception $e) {
-            echo 'Caught exception: ', $e->getMessage(), "\n";
+            foreach ($data as $element) {
+                $lastname = $element['_source']["enrichments_basic_name"]["Achternaam"];
+                print("Evaluating " . $lastname . "\n");
+
+                if (!isset($element["_source"]["enrichments_family_name"]) &&
+                        isset($element["_source"]["enrichments_basic_name"])) {
+                    if (isset($element["_source"]["enrichments_family_name"]))
+                        continue;
+
+                    $res = $this->Familienamen_model->enrich_lastname($lastname, $timestamp);
+
+                    $fields = [ 'enrichments_family_name' => $res];
+                    print("\tWriting " . $element['_source']["enrichments_basic_name"]["Achternaam"] . "\n");
+
+                    die('dsaasdsdahjkadshjk');
+
+                    $this->Es_model->update($index, $indextype, $element["_id"], $fields);
+                }
+            }
+            $vol += count($data);
+            print(" Items processed $vol\n");
         }
     }
 
@@ -222,11 +197,9 @@ class Rechtspraak_model extends CI_Model {
             die('wrong parameter');
         }// case everything = default
 
-        try {
-            $result = $this->Es_model->get_all_unique_countfield($index, $indextype, $field, $filter);
-        } catch (Exception $e) {
-            echo 'Caught exception: ', $e->getMessage(), "\n";
-        }
+
+        $result = $this->Es_model->get_all_unique_countfield($index, $indextype, $field, $filter);
+
 
         return $result;
     }
@@ -292,8 +265,8 @@ class Rechtspraak_model extends CI_Model {
             // print("UPDATE '$name' with doctype $doctype id $id\n");
             $this->update_item($id, $name, $item, $index, $indextype, $doctype, $inserted, $hit);
         } else {
-            print("INSERT '$name' with doctype $doctype id $id\n");
-            error_log("INSERT '$name' with doctype $doctype id $id");
+            //    print("INSERT '$name' with doctype $doctype id $id\n");
+            //error_log("INSERT '$name' with doctype $doctype id $id");
             $this->insert_item($id, $name, $item, $index, $indextype, $doctype, $inserted);
         }
     }
@@ -339,7 +312,7 @@ class Rechtspraak_model extends CI_Model {
 
             $this->Es_model->update($index, $indextype, $hit["_id"], $fields);
 
-            print("updated doc in production " . $name . "\n");
+            // print("updated doc in production " . $name . "\n");
             //error_log("updated in production " . $item_t["name"]);
         }
         return;
@@ -377,10 +350,6 @@ class Rechtspraak_model extends CI_Model {
 
     /*
      * Restore used by CLI
-     * @todo: switch to gzdecode / remove 'id' as this contains wrong hashes
-     * better: restore all fields that were backedup (and adapt backup to 
-     * do only right fields
-     * later we can also restore other indexes
      */
 
     public function restore() {
@@ -429,31 +398,29 @@ class Rechtspraak_model extends CI_Model {
     public function backup() {
         $index = 'rechtspraak_e';
         $path = 'backups/';
-   
-        $dotm = date('d'); // should return day of the month 
-  
-        $dir = $path . $dotm . "/";
-        
-   
-        mkdir($dir); // create directory if not exists
-    
-        // clean directory
-        $di = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
-        $ri = new RecursiveIteratorIterator($di, RecursiveIteratorIterator::CHILD_FIRST);
-        foreach ($ri as $file) {
-            $file->isDir() ? rmdir($file) : unlink($file);
-        }
-        
+
         try {
+            $dotm = date('d'); // should return day of the month
+            $dir = $path . $dotm . "/";
+
+            @mkdir($dir); // create directory if not exists
+            // clean directory
+            $di = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
+            $ri = new RecursiveIteratorIterator($di, RecursiveIteratorIterator::CHILD_FIRST);
+            foreach ($ri as $file) {
+                $file->isDir() ? rmdir($file) : unlink($file);
+            }
+
             $scroll_id = null;
             $vol = 0;
             while (true) {
                 $data = $this->Es_model->get_all($index, $scroll_id);
-              //  print ("lengte van de hash:" . count($data) . "\n");
+                //  print ("lengte van de hash:" . count($data) . "\n");
                 if (count($data) == 0) {
                     break;
                 }
                 $json = json_encode($data);
+
                 $gzjson = gzencode($json, 9);
                 print ("lengte van de json uncompressed:" . round(strlen($json) / (1024 ))
                         . " KB compressed:" . round(strlen($gzjson) / (1024 )) . " KB\n");
@@ -463,6 +430,9 @@ class Rechtspraak_model extends CI_Model {
                 print("saving '$filename'\n");
                 $vol += count($data);
             }
+            // create huge ass zipfile down here
+            $cmd = 'tar cvfz ' . $dir . 'fulldump_rechtspraak_e.tar.gz ' . $dir . '*';
+            system($cmd);
         } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n";
         }
@@ -476,10 +446,8 @@ class Rechtspraak_model extends CI_Model {
         try {
             $response = $this->Es_model
                     ->create_index($index, $this->extract_index_template());
-
-             print("Created Index $index\n");
-             return $response;
-        
+            print("Created Index $index\n");
+            return $response;
         } catch (Exception $e) {
             if (json_decode($e->getMessage())->error->type != "index_already_exists_exception") {
                 echo 'Caught exception: ', $e->getMessage(), "\n";
@@ -495,13 +463,13 @@ class Rechtspraak_model extends CI_Model {
         try {
             $response = $this->Es_model
                     ->create_index($index, $this->transform_index_template());
+            print("Created Index $index\n");
+            return $response;
         } catch (Exception $e) {
             if (json_decode($e->getMessage())->error->type != "index_already_exists_exception") {
                 echo 'Caught exception: ', $e->getMessage(), "\n";
             }
         }
-        print("Created Index $index\n");
-        return $response;
     }
 
     /*
@@ -512,13 +480,13 @@ class Rechtspraak_model extends CI_Model {
         try {
             $response = $this->Es_model
                     ->create_index($index, $this->load_index_template());
+            print("Created Index $index\n");
+            return $response;
         } catch (Exception $e) {
             if (json_decode($e->getMessage())->error->type != "index_already_exists_exception") {
                 echo 'Caught exception: ', $e->getMessage(), "\n";
             }
         }
-        print("Created Index $index\n");
-        return $response;
     }
 
     /*

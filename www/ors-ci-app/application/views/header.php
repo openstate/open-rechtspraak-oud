@@ -31,7 +31,7 @@
                         <div class="container">
                             <ul class="nav">
                                 <li><a href="<?php echo base_url() ?>index.php">Home</a></li>
-                                <li><a href="<?php echo base_url() ?>index.php/relations/persons">Personen</a></li>
+                                <li><a href="<?php echo base_url() ?>index.php/rechtspraak/personen">Personen</a></li>
                                 <li><a href="<?php echo base_url() ?>index.php/content/page/opendata">Open Data</a></li>
                                 <li><a href="<?php echo base_url() ?>index.php/content/page/contact">Contact</a></li>
                             </ul>

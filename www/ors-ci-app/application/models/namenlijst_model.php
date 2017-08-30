@@ -1,8 +1,6 @@
 <?php
 
-// inlcude once Elastic search libr
-//require_once 'pgbrowser.php';
-//require_once 'eswrapper.php';
+require_once 'pgbrowser.php';
 
 class Namenlijst_model extends CI_Model {
 
@@ -11,8 +9,120 @@ class Namenlijst_model extends CI_Model {
         $this->load->model('Rechtspraak_model');
         $this->load->model('Es_model');
     }
-                
-    
+
+    public function extract() {
+
+        $inserted = $this->Rechtspraak_model->get_timestamp();
+
+        $this->extr_Courts($inserted);
+        $this->extr_CourtsOfAppeal($inserted);
+        $this->extr_HigherCourts($inserted);
+    }
+
+    /*
+     * By default only transforms data from newer timestamps (no recovery)
+     */
+
+    public function transform() {
+        $src_index = "rechtspraak_e";
+        $dst_index = "rechtspraak_t";
+        $res = $this->Rechtspraak_model->create_transform_index($dst_index);
+        $indextype = 'namenlijst';
+        $updatedfield = 'inserted';
+        $sortfield = 'inserted';
+        // get most recent timestamp from transform index (rechtspraak_t/namenlijst field= inserted
+
+        try {
+            $from = $this->Es_model->get_most_recent_value($dst_index, $indextype, $updatedfield);
+        } catch (Exception $e) {
+            echo 'Caught exception: ', $e->getMessage(), "\n";
+            echo "dit betekent wsl. dat er geen data is";
+        }
+        print("\nTransforming data from $from\n");
+
+        $scroll_id = null;
+        $vol = 0;
+        while (true) {
+            $data = $this->Es_model->get_all_it_sortable_from($src_index, $indextype, $scroll_id, $sortfield, $from);
+
+            if (count($data) == 0) {
+                break;
+            }
+
+            foreach ($data as $item) {
+                print("\tTransforming '" . $item["_source"]["name"] . "' inserted: " . $item["_source"]["inserted"] . "\n");
+                try {
+                    $t_item = $this->transform_e_item($item['_source']['item']); // html --> json
+                } catch (Exception $e) {
+                    echo 'Caught exception: ', $e->getMessage(), "\n";
+                    var_dump($item);
+                    print("Nasty bug in transform namenlijst\n");
+                    die();
+                }
+                $tname = trim($item["_source"]["name"]);
+
+                $res = $this->Rechtspraak_model->put_item(
+                        md5($tname), $tname, json_encode($t_item)
+                        , $dst_index, $indextype, $item["_source"]["type"], $item["_source"]["inserted"]);
+            }
+            // end do
+            $vol += count($data);
+            print(" Items processed $vol\n");
+        }
+
+
+        return true;
+    }
+
+    /*
+     * By default only loads data from newer timestamps (no recovery)
+     */
+
+    public function load() {
+        $src_index = "rechtspraak_t";
+        $dst_index = 'rechtspraak_l';
+        $res = $this->Rechtspraak_model->create_load_index($dst_index);
+        $indextype = 'namenlijst';
+        $sortfield = 'inserted';
+        $updatedfield = 'updated';
+
+        try {
+            // get most recent timestamp from load index (rechtspraak_l/namenlijst field= inserted
+            $from = $this->Es_model->get_most_recent_value($dst_index, $indextype, $updatedfield);
+        } catch (Exception $e) {
+            $err = json_decode($e->getMessage(), true);
+            if ("No mapping found for [updated] in order to sort on" == $err['error']["root_cause"][0]["reason"]) {
+                // print("setting nulll");
+                $from = null;
+            } else {
+                print ('Caught exception: ' . $e->getMessage() . "\n\n");
+                die();
+            }
+        }
+        $scroll_id = null;
+        $vol = 0;
+        while (true) {
+            $data = $this->Es_model->get_all_it_sortable_from($src_index, $indextype, $scroll_id, $sortfield, $from);
+            if (count($data) == 0) {
+                break;
+            }
+
+            foreach ($data as $item) {
+                //   print("loading '" . $item["_source"]["name"] . "' doctype " . $item['_source']['type'] . " inserted: " . $item["_source"]["inserted"] . "\n");
+                $this->Rechtspraak_model->load_item(
+                        $item["_source"]["id"], $item["_source"]["name"], json_decode($item['_source']['item'], true), $dst_index, $indextype, $item['_source']['type'], $item["_source"]["inserted"]);
+            }
+            // end do
+            $vol += count($data);
+            print(" Items processed $vol\n");
+        }
+        return true;
+    }
+
+    /*
+     * private functions for extract
+     */
+
     private function extr_Courts($inserted) {
         //// rechtbanken (/div#chklCourts
         $snames = array('AR0040' => 'Amsterdam', 'AR0041' => 'Noord-Holland',
@@ -58,25 +168,16 @@ class Namenlijst_model extends CI_Model {
     private function extr_HigherCourts($inserted) {
         // overige hoge raden
         $types = array(/* record example */
-               'Centrale Raad van Beroep' => 'ctl00$ContentPlaceHolder1$chklInstances$1'
-            , 
+            'Centrale Raad van Beroep' => 'ctl00$ContentPlaceHolder1$chklInstances$1'
+            ,
             'Hoge Raad' => 'ctl00$ContentPlaceHolder1$chklInstances$0'
-                 ,            'College van Beroep voor het bedrijfsleven' => 'ctl00$ContentPlaceHolder1$chklInstances$2' 
+            , 'College van Beroep voor het bedrijfsleven' => 'ctl00$ContentPlaceHolder1$chklInstances$2'
         );
 
         foreach ($types as $key => $value) {
             $set = $key;
             $this->get_set($set, array($value => $set), $inserted);
         }
-    }
-
-    public function extract() {
-
-        $inserted = $this->Rechtspraak_model->get_timestamp();
-
-        $this->extr_Courts($inserted);
-        $this->extr_CourtsOfAppeal($inserted);
-        $this->extr_HigherCourts($inserted);
     }
 
     private function get_set($set, $arrs, $inserted) {
@@ -87,6 +188,7 @@ class Namenlijst_model extends CI_Model {
 
         $url = 'https://namenlijst.rechtspraak.nl/default.aspx';
         $b = new PGBrowser();
+
         $page = $b->get($url); // make initial connect
 
         error_log("Fetching $set");
@@ -133,55 +235,9 @@ class Namenlijst_model extends CI_Model {
     }
 
     /*
-     * By default only transforms data from newer timestamps (no recovery)
+     * private functions for transform
      */
 
-    public function transform() {
-        $src_index = "rechtspraak_e";
-        $dst_index = "rechtspraak_t";
-        $res = $this->Rechtspraak_model->create_transform_index($dst_index);
-        $indextype = 'namenlijst';
-        $updatedfield = 'inserted';
-        $sortfield = 'inserted';
-        // get most recent timestamp from transform index (rechtspraak_t/namenlijst field= inserted
-
-        try {
-            $from = $this->Es_model->get_most_recent_value($dst_index, $indextype, $updatedfield);
-        } catch (Exception $e) {
-            echo 'Caught exception: ', $e->getMessage(), "\n";
-            echo "dit betekent wsl. dat er geen data is";
-        }
-        print("\nTransforming data from $from\n");
-
-        $scroll_id = null;
-        $vol = 0;
-        while (true) {
-            $data = $this->Es_model->get_all_it_sortable_from($src_index, $indextype, $scroll_id, $sortfield, $from);
-
-            if (count($data) == 0) {
-                break;
-            }
-
-            foreach ($data as $item) {
-                print("\tTransforming '" . $item["_source"]["name"] . "' inserted: " . $item["_source"]["inserted"] . "\n");
-                $t_item = $this->transform_e_item($item['_source']['item']); // html --> json
-
-                $tname = trim($item["_source"]["name"]);
-
-                $res = $this->Rechtspraak_model->put_item(
-                        md5($tname), $tname, json_encode($t_item)
-                        , $dst_index, $indextype, $item["_source"]["type"], $item["_source"]["inserted"]);
-            }
-            // end do 
-            $vol += count($data);
-            print(" Items processed $vol\n");
-        }
-
-
-        return true;
-    }
-
-    // generiek maken 
     private function transform_e_item($e_item) {
         $doc = new DOMDocument();
 
@@ -194,8 +250,7 @@ class Namenlijst_model extends CI_Model {
             $t_item = $this->transform_details($details);
         } else {
             error_log("Page didn't contain div@[class=details]");
-            echo "<i>Foutmelding: HTML bron data bevat geen div@[class=details]</i>";
-            die("die transform_e_item");
+            throw new Exception('<i>Foutmelding: HTML bron data bevat geen div@[class=details]</i>');
         }
 
         return $t_item;
@@ -273,51 +328,6 @@ class Namenlijst_model extends CI_Model {
             $data['message'] = $a;
         }
         return $data;
-    }
-
-    /*
-     * By default only loads data from newer timestamps (no recovery)
-     */
-
-    public function load() {
-        $src_index = "rechtspraak_t";
-        $dst_index = 'rechtspraak_l';
-        $res = $this->Rechtspraak_model->create_load_index($dst_index);
-        $indextype = 'namenlijst';
-        $sortfield = 'inserted';
-        $updatedfield = 'updated';
-
-        try {
-            // get most recent timestamp from load index (rechtspraak_l/namenlijst field= inserted
-            $from = $this->Es_model->get_most_recent_value($dst_index, $indextype, $updatedfield);
-        } catch (Exception $e) {
-            $err = json_decode($e->getMessage(), true);
-            if ("No mapping found for [updated] in order to sort on" == $err['error']["root_cause"][0]["reason"]) {
-                // print("setting nulll");
-                $from = null;
-            } else {
-                print ('Caught exception: ' . $e->getMessage() . "\n\n");
-                die();
-            }
-        }
-        $scroll_id = null;
-        $vol = 0;
-        while (true) {
-            $data = $this->Es_model->get_all_it_sortable_from($src_index, $indextype, $scroll_id, $sortfield, $from);
-            if (count($data) == 0) {
-                break;
-            }
-
-            foreach ($data as $item) {
-                print("loading '" . $item["_source"]["name"] . "' doctype " . $item['_source']['type'] . " inserted: " . $item["_source"]["inserted"] . "\n");
-                $this->Rechtspraak_model->load_item(
-                        $item["_source"]["id"], $item["_source"]["name"], json_decode($item['_source']['item'], true), $dst_index, $indextype, $item['_source']['type'], $item["_source"]["inserted"]);          
-            }
-            // end do 
-            $vol += count($data);
-            print(" Items processed $vol\n");
-        }
-        return true;
     }
 
 }

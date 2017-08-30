@@ -7,7 +7,7 @@ class Es_model extends CI_Model {
     public function __construct() {
         parent::__construct();
 
-        $hosts = ['ors_elasticsearch_1'];
+        $hosts = ['docker_c-dev-es_1'];
         $this->client = Elasticsearch\ClientBuilder::create()->setHosts($hosts)->build();
     }
 
@@ -46,10 +46,10 @@ class Es_model extends CI_Model {
         $response;
 
         if (!isset($scroll_id)) {
-            $params = ['index' => $index, 'size' => 100, 'scroll' => '1m'];
+            $params = ['index' => $index, 'size' => 100, 'scroll' => '5m'];
             $response = $this->client->search($params);
         } else {
-            $params = [ 'scroll' => '1m', 'scroll_id' => $scroll_id];
+            $params = [ 'scroll' => '5m', 'scroll_id' => $scroll_id];
             $response = $this->client->scroll($params);
         }
 
@@ -62,17 +62,19 @@ class Es_model extends CI_Model {
 
 // used by ?    
     public function get_all_it($index, $indextype, &$scroll_id) {
+        die("OBSOLETE FUNTCTION GET_ALL_IT");
+
         $response;
 
         if (!isset($scroll_id)) {
             $params = ['index' => $index,
                 'type' => $type,
-                'size' => 100, 'scroll' => '1m'];
+                'size' => 100, 'scroll' => '5m'];
             $response = $this->client->search($params);
 //            print("retrieved  " . count($response['hits']['hits']) . " of total of " .
 //                    $response['hits']['total'] . "\n");
         } else {
-            $params = [ 'scroll' => '1m', 'scroll_id' => $scroll_id];
+            $params = [ 'scroll' => '5m', 'scroll_id' => $scroll_id];
             $response = $this->client->scroll($params);
             //        print("retrieved another " . count($response['hits']['hits']) . "\n");
         }
@@ -95,14 +97,14 @@ class Es_model extends CI_Model {
                     'type' => $indextype,
                     'sort' => $sortfield,
                     'size' => 100,
-                    'scroll' => '1m'
+                    'scroll' => '5m'
                 ];
             } else {
                 $params = ['index' => $index,
                     'type' => $indextype,
                     'sort' => $sortfield,
                     'size' => 100,
-                    'scroll' => '1m',
+                    'scroll' => '5m',
                     'body' => [
                         'query' => [ "range" => [
                                 $sortfield => [
@@ -117,10 +119,10 @@ class Es_model extends CI_Model {
 
             $response = $this->client->search($params);
 
-            print("retrieved data from $from that " . count($response['hits']['hits']) . " of total of " .
-                    $response['hits']['total'] . "\n");
+//            print("retrieved data from $from that " . count($response['hits']['hits']) . " of total of " .
+//                    $response['hits']['total'] . "\n");
         } else {
-            $params = [ 'scroll' => '1m', 'scroll_id' => $scroll_id];
+            $params = [ 'scroll' => '5m', 'scroll_id' => $scroll_id];
             $response = $this->client->scroll($params);
             //    print("retrieved another " . count($response['hits']['hits']) . "\n");
         }
@@ -141,12 +143,12 @@ class Es_model extends CI_Model {
             $params = ['index' => $index,
                 'type' => $indextype,
                 'sort' => $sortfield,
-                'size' => 100, 'scroll' => '1m'];
+                'size' => 100, 'scroll' => '5m'];
             $response = $this->client->search($params);
             //   print("retrieved  " . count($response['hits']['hits']) . " of total of " .
             //             $response['hits']['total'] . "\n");
         } else {
-            $params = [ 'scroll' => '1m', 'scroll_id' => $scroll_id];
+            $params = [ 'scroll' => '5m', 'scroll_id' => $scroll_id];
             $response = $this->client->scroll($params);
             //    print("retrieved another " . count($response['hits']['hits']) . "\n");
         }
@@ -190,12 +192,12 @@ class Es_model extends CI_Model {
             $params = ['index' => $index,
                 'type' => $indextype,
                 '_source_exclude' => $excludes,
-                'size' => 500, 'scroll' => '1m'];
+                'size' => 100, 'scroll' => '5m'];
             $response = $this->client->search($params);
             //   print("retrieved  " . count($response['hits']['hits']) . " of total of " .
             //             $response['hits']['total'] . "\n");
         } else {
-            $params = [ 'scroll' => '1m', 'scroll_id' => $scroll_id];
+            $params = [ 'scroll' => '5m', 'scroll_id' => $scroll_id];
             $response = $this->client->scroll($params);
             //    print("retrieved another " . count($response['hits']['hits']) . "\n");
         }
@@ -229,7 +231,7 @@ class Es_model extends CI_Model {
         return $res;
     }
 
-    // asumes  fields to be comparable
+    // asumes fields to be comparable
     public function exists($index, $indextype, $fields) {
         $params = array();
         $params['index'] = $index;
@@ -245,7 +247,7 @@ class Es_model extends CI_Model {
                         'bool' => [
                             'must' => $term_arr
         ]]]]];
-        try {
+        //try {
             $response = $this->client->search($params);
             if ($response["hits"]["total"] == 0) {
                 return false;
@@ -256,20 +258,21 @@ class Es_model extends CI_Model {
             } else { // =1
                 return $response["hits"]["hits"][0];
             }
-        } catch (Exception $e) {
-            print("error\n");
-            var_dump($e->getMessage());
-            die('end of error');
-            if (json_decode($e->getMessage())->error->root_cause[0]
-                    ->type != "index_not_found_exception") {
-                print_r(json_decode($e->getMessage())->error);
-                die("\n\nrethrowing shit\n\n");
-                throw ($e);
-            } else {
-// else continue w. false
-                return false;
-            }
-        }
+        //} 
+//        catch (Exception $e) {
+//            print("error\n");
+//            var_dump($e->getMessage());
+//            die('end of error');
+//            if (json_decode($e->getMessage())->error->root_cause[0]
+//                    ->type != "index_not_found_exception") {
+//                print_r(json_decode($e->getMessage())->error);
+//                die("\n\nrethrowing shit\n\n");
+//                throw ($e);
+//            } else {
+//// else continue w. false
+//                return false;
+//            }
+  //      }
     }
 
     // used by person in viewer

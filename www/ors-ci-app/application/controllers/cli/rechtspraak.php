@@ -3,27 +3,17 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-define('DS', DIRECTORY_SEPARATOR);
-
-require_once 'pgbrowser.php';
-
-// CLI controller combines sources, enrichers,
-// backups and restores database for recovery (extraction pipe)
 class Rechtspraak extends CI_Controller {
-
-    private $results = array();
 
     public function __construct() {
         parent::__construct();
-        ini_set('error_log', 'rechtspraak.error.log');
-        $this->load->model('Rechtspraak_model');
-        $this->load->model('Namenlijst_model');
-        $this->load->helper('url');
-        $this->results = array();
         if (!$this->input->is_cli_request()) {
             error_log("(Illegal) Web Access Attempt on Rechstpraak Crawler");
             die();
         }
+        ini_set('error_log', 'rechtspraak-cli.error.log');
+
+        $this->load->model('Rechtspraak_model');
     }
 
     /*
@@ -56,6 +46,7 @@ class Rechtspraak extends CI_Controller {
 
     public function extract() {
         try {
+            $this->load->model('Namenlijst_model');
             $this->Namenlijst_model->extract();
         } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n";
@@ -68,6 +59,7 @@ class Rechtspraak extends CI_Controller {
 
     public function extract_u() {
         try {
+            //$this->load->model('Uitspraken_model');
             $this->Uitspraken_model->extract();
         } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n";
@@ -80,14 +72,16 @@ class Rechtspraak extends CI_Controller {
 
     public function transform() {
         try {
+            $this->load->model('Namenlijst_model');
             $this->Namenlijst_model->transform();
         } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n";
         }
     }
 
-     public function transform_u() {
+    public function transform_u() {
         try {
+            // $this->load->model('Uitspraken_model');
             $this->Uitspraken_model->transform();
         } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n";
@@ -100,6 +94,7 @@ class Rechtspraak extends CI_Controller {
 
     public function load() {
         try {
+            $this->load->model('Namenlijst_model');
             $this->Namenlijst_model->load();
         } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n";
@@ -108,6 +103,7 @@ class Rechtspraak extends CI_Controller {
 
     public function load_u() {
         try {
+            //$this->load->model('Uitspraken_model');
             $this->Uitspraken_model->load();
         } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n";
@@ -115,22 +111,30 @@ class Rechtspraak extends CI_Controller {
     }
 
     /*
-     * Enricher
+     * Enricher basic last name
      */
 
-    public function enrich() {
+    public function enrich_b() {
         try {
-
-           // $this->Rechtspraak_model->enrich_family();
-
             $this->Rechtspraak_model->enrich_basic();
-
         } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n";
         }
     }
 
-     /*
+    /*
+     * Enricher family namens
+     */
+
+    public function enrich_f() {
+        try {
+            $this->Rechtspraak_model->enrich_family();
+        } catch (Exception $e) {
+            echo 'Caught exception: ', $e->getMessage(), "\n";
+        }
+    }
+
+    /*
      * assumes rechtspraak.json in 'backups/old-data' directory
      * assumes full import can be realized
      * transformes some index stuff to compatability
@@ -143,7 +147,6 @@ class Rechtspraak extends CI_Controller {
             echo 'Caught exception: ', $e->getMessage(), "\n";
         }
     }
-
 
 }
 ?>
