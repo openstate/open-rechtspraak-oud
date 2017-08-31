@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://ors.openstate.eu';
+$config['base_url']	= 'https://ors.openstate.eu';
 //$config['base_url']	= 'http://localhost';
 /*
 |--------------------------------------------------------------------------
