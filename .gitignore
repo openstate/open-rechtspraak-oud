@@ -4,3 +4,6 @@ rechtspraak.json
 vendor
 *.swp
 *.log
+/nbproject/private/
+/nbproject
+*~
