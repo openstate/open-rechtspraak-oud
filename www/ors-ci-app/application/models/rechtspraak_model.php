@@ -184,22 +184,25 @@ class Rechtspraak_model extends CI_Model {
         $indextype = 'namenlijst';
         $field = 'name';
         $filter;
-
+        $sortfield = 'updated';
+                
         if (!isset($param)) {            // default = current only
-            $sortfield = 'updated';
+           
             $from = $this->Es_model->get_most_recent_value($index, $indextype, $sortfield);
-
-            $filter = [ "range" => [
+//print ("FROM is $from \n</br>");
+           $filter = [ "range" => [
                     $sortfield => [
                         'gte' => $from
             ]]];
+           
         } elseif ($param != 'unfiltered') {
             die('wrong parameter');
         }// case everything = default
 
+        var_dump($filter);
 
         $result = $this->Es_model->get_all_unique_countfield($index, $indextype, $field, $filter);
-
+/* problematic, yields only 3 results (dhr. mr. M.J. Alink	1,mw. mr. L.C. Bachrach	1,mw. mr. L.Z. Achouak El Idrissi	1)*/
 
         return $result;
     }
@@ -431,7 +434,7 @@ class Rechtspraak_model extends CI_Model {
                 $vol += count($data);
             }
             // create huge ass zipfile down here
-            $cmd = 'tar cvfz ' . $dir . 'fulldump_rechtspraak_e.tar.gz ' . $dir . '*';
+            $cmd = 'tar cvfz ' . $dir . 'fulldump_rechtspraak_e.tar.gz.skip-me ' . $dir . '*';
             system($cmd);
         } catch (Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n";
