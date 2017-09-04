@@ -14,8 +14,8 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/rdw-folder/vote-ci-app';
-
+$config['base_url']	= 'https://ors.openstate.eu';
+//$config['base_url']	= 'http://localhost';
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -26,7 +26,7 @@ $config['base_url']	= 'http://localhost/rdw-folder/vote-ci-app';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +45,7 @@ $config['index_page'] = 'index.php';
 |
 */
 $config['uri_protocol']	= 'AUTO';
+//REQUEST_URI';
 
 /*
 |--------------------------------------------------------------------------
@@ -126,7 +127,7 @@ $config['subclass_prefix'] = 'MY_';
 | DO NOT CHANGE THIS UNLESS YOU FULLY UNDERSTAND THE REPERCUSSIONS!!
 |
 */
-$config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-';
+$config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-+';
 // added \+ by wikiwise
 
 /*
