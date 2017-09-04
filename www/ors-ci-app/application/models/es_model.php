@@ -7,7 +7,7 @@ class Es_model extends CI_Model {
     public function __construct() {
         parent::__construct();
 
-        $hosts = ['ors_elasticsearch_1'];
+        $hosts = ['docker_c-dev-es_1'];
         $this->client = Elasticsearch\ClientBuilder::create()->setHosts($hosts)->build();
     }
 
@@ -63,7 +63,7 @@ class Es_model extends CI_Model {
 // used by ?    
     public function get_all_it($index, $indextype, &$scroll_id) {
         die("OBSOLETE FUNTCTION GET_ALL_IT");
-
+        
         $response;
 
         if (!isset($scroll_id)) {
@@ -108,7 +108,7 @@ class Es_model extends CI_Model {
                     'body' => [
                         'query' => [ "range" => [
                                 $sortfield => [
-                                    'gt' => $from
+                                    'gt' => $from 
                                 ]
                             ]
                         ]
@@ -207,6 +207,8 @@ class Es_model extends CI_Model {
         }
         $scroll_id = $response["_scroll_id"];
         return $response['hits']['hits'];
+        
+        
     }
 
     // used by create_extracted)index (or...)

@@ -65,7 +65,7 @@ class Namenlijst_model extends CI_Model {
                         md5($tname), $tname, json_encode($t_item)
                         , $dst_index, $indextype, $item["_source"]["type"], $item["_source"]["inserted"]);
             }
-            // end do
+            // end do 
             $vol += count($data);
             print(" Items processed $vol\n");
         }
@@ -112,7 +112,7 @@ class Namenlijst_model extends CI_Model {
                 $this->Rechtspraak_model->load_item(
                         $item["_source"]["id"], $item["_source"]["name"], json_decode($item['_source']['item'], true), $dst_index, $indextype, $item['_source']['type'], $item["_source"]["inserted"]);
             }
-            // end do
+            // end do 
             $vol += count($data);
             print(" Items processed $vol\n");
         }

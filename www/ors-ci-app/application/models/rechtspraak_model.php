@@ -400,10 +400,10 @@ class Rechtspraak_model extends CI_Model {
         $path = 'backups/';
 
         try {
-            $dotm = date('d'); // should return day of the month
+            $dotm = date('d'); // gives timezone issue but is bS
+            @mkdir($path);
             $dir = $path . $dotm . "/";
-
-            @mkdir($dir); // create directory if not exists
+            @mkdir($dir); 
             // clean directory
             $di = new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS);
             $ri = new RecursiveIteratorIterator($di, RecursiveIteratorIterator::CHILD_FIRST);

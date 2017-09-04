@@ -1,7 +1,7 @@
 </div><!-- /.content -->
 <footer style="clear:both;">
     <!--<p>Page rendered in <strong>{elapsed_time}</strong> seconds</p>-->
-    <p> <small>&copy; <?php date_default_timezone_set('Europe/Amsterdam'); echo date("Y"); ?> <a href="https://openstate.eu">Open State Foundation</a></small></p>
+    <p> <small>&copy; <?php date_default_timezone_set('Europe/Amsterdam'); echo date("Y"); ?> <a href="http://openstate.eu">Open State Foundation</a></small></p>
 </footer>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

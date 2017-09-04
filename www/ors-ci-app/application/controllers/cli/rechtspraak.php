@@ -11,7 +11,7 @@ class Rechtspraak extends CI_Controller {
             error_log("(Illegal) Web Access Attempt on Rechstpraak Crawler");
             die();
         }
-        ini_set('error_log', 'rechtspraak-cli.error.log');
+        ini_set('error_log', 'rechtspraak-cli.error.log');       
 
         $this->load->model('Rechtspraak_model');
     }

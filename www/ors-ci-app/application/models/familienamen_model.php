@@ -20,7 +20,7 @@ class Familienamen_model extends CI_Model {
         print("\tEnriching " . $lastname . "\n");
 
         $extr = $this->extract($lastname, $timestamp);
-        die('elkkekr');
+        die(" end of extract\n");
         $res = $this->transform($extr);
 
         // now return value from transformDB;
@@ -43,23 +43,34 @@ class Familienamen_model extends CI_Model {
             $res = $this->Es_model->exists($index, $indextype, $fields);
         } catch (Exception $e) {
             $json = json_decode($e->getMessage());
-            if ($json->error->root_cause[0]->type === "index_not_found_exception") {            
+            if ($json->error->root_cause[0]->type === "index_not_found_exception") {
                 $this->Rechtspraak_model->create_extract_index($index);
-                $res=false;
+                $res = false;
             } else {
                 throw Exception($e);
             }
         }
-        var_dump($res);
-        if ($res != false) return $res;
-        
-        // already exists???
-        //return item;
-        // else harvest data from web
 
-        $link = "http://www.cbgfamilienamen.nl/nfb/lijst_namen.php?operator=eq&naam="
-                . urlencode($lastname);
+        if ($res != false)
+            return $res;
+
+        print("crawling $lastname\n");
+    
+    //        $link = 'http://www.cbgfamilienamen.nl/nfb/lijst_namen.php?operator=eq&naam='. urlencode($lastname);
+
+
+        $qry = http_build_query(array('operator' => 'eq', 'naam'=>$lastname ) ) ;
+        $link = 'http://www.cbgfamilienamen.nl/nfb/lijst_namen.php?' . $qry;
+
+        var_dump($link);
+        
+        error_reporting(~0);
+ini_set('display_errors', 1);
         $response = file_get_contents($link);
+//https://stackoverflow.com/questions/3519939/how-can-i-find-where-i-will-be-redirected-using-curl
+        var_dump($response);
+        die();
+
 
         $doc = new DOMDocument();
 
