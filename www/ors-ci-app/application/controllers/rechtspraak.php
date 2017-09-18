@@ -11,7 +11,7 @@ class Rechtspraak extends CI_Controller {
         $this->load->helper('form');
         $this->load->helper('url');
         $this->load->library('table');
-//  $this->output->cache(60);//prod
+        $this->output->cache(60); //prod
         $this->load->model('Rechtspraak_model');
         $this->load->model('Es_model');
     }
