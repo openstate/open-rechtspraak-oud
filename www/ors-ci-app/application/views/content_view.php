@@ -1,6 +1,6 @@
 <!-- Breadcrumbs -->
 <ul class="breadcrumb">
-    <li class="active"><a href="<?= base_url(); ?>index.php">Home</a></li>
+    <li class="active"><a href="<?= base_url(); ?>">Home</a></li>
 
 </ul>
 <!--  row of columns -->
